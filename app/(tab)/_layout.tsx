@@ -1,15 +1,15 @@
 import { Tabs } from "expo-router";
 import {tabs} from '@/constant/data'
-import { View } from "react-native";
-import {colors, components} from '@/constant/theme'
+import { View, Image } from "react-native";
+import { colors, components } from '@/constant/theme'
 import clsx from "clsx";
-import { Image } from "react-native";
-import {useSafeAreaInsets} from 'react-native-safe-area-context'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 
 const tabBar = components.tabBar;
 const TabLayout = () => 
 {
+    const ICON_VERTICAL_ADJUSTMENT = 1.6;
     const insets = useSafeAreaInsets();
     const TabBarIcon = ({focused, icon}: TabIconProps) => {
         return(
@@ -37,7 +37,7 @@ const TabLayout = () =>
                 
             },
             tabBarItemStyle: {
-                paddingVertical: tabBar.height / 2 - tabBar.iconFrame / 1.6,
+                paddingVertical: tabBar.height / 2 - tabBar.iconFrame / ICON_VERTICAL_ADJUSTMENT,
                 height: tabBar.height,
             },
             tabBarIconStyle: {

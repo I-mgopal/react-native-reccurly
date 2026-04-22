@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text } from "react-native";
 import {Link} from "expo-router";
 import { cssInterop } from "nativewind";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,13 +11,13 @@ export default function App() {
     <SafeAreaView className="flex-1 bg-background p-5">
       <Text className="text-5xl font-sans-extrabold">Home</Text>
 
-      <Link href="/onboarding" className="mt-4 font-sans-bold  rounded bg-primary text-white p-4">
+      <Link href="/onboarding" className="mt-4 font-sans-bold rounded bg-primary text-white p-4">
         Go to onboarding
       </Link>
       <Link href="/(auth)/sign-in" className="mt-4 font-sans-bold rounded bg-primary text-white p-4">
         Go to Sign In
       </Link>
-      <Link href="/(auth)/sign-up" className="mt-4 font-sans-bold  rounded bg-primary text-white p-4">
+      <Link href="/(auth)/sign-up" className="mt-4 font-sans-bold rounded bg-primary text-white p-4">
         Go to Sign Up
       </Link>
     </SafeAreaView>
