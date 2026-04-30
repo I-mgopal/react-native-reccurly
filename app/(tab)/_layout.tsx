@@ -1,16 +1,23 @@
-import { Tabs } from "expo-router";
+import { Tabs, Redirect } from "expo-router";
 import {tabs} from '@/constant/data'
 import { View, Image } from "react-native";
 import { colors, components } from '@/constant/theme'
 import clsx from "clsx";
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useAuth } from '@clerk/clerk-expo'
 
 
 const tabBar = components.tabBar;
 const TabLayout = () => 
 {
+    const { isSignedIn } = useAuth();
     const ICON_VERTICAL_ADJUSTMENT = 1.6;
     const insets = useSafeAreaInsets();
+
+    if (!isSignedIn) {
+        return <Redirect href="/(auth)/sign-in" />;
+    }
+
     const TabBarIcon = ({focused, icon}: TabIconProps) => {
         return(
             <View className="tabs-icon">
