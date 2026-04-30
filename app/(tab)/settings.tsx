@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View, Image, ScrollView } from 'react-native'
+import { Text, TouchableOpacity, View, Image, ScrollView, Alert } from 'react-native'
 import { cssInterop } from "nativewind";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth, useUser } from "@clerk/clerk-expo";
@@ -9,8 +9,13 @@ const Settings = () => {
   const { signOut } = useAuth();
   const { user } = useUser();
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (err: any) {
+      console.error(`Sign-out failed: ${err.message || 'unknown error'}`);
+      Alert.alert("Error", "Failed to sign out. Please try again.");
+    }
   };
 
   return (

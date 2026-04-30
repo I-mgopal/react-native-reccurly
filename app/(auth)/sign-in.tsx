@@ -31,10 +31,11 @@ export default function SignIn() {
         await setActive({ session: signInAttempt.createdSessionId });
         router.replace('/(tab)');
       } else {
-        console.error(JSON.stringify(signInAttempt, null, 2));
+        console.log(`Sign-in attempt status: ${signInAttempt.status}`);
+        Alert.alert("Sign In Incomplete", `Additional action required. Status: ${signInAttempt.status}`);
       }
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
+      console.error(`Sign-in failed: ${err.errors?.[0]?.message || err.message || 'unknown error'}`);
       Alert.alert("Error", err.errors?.[0]?.message || "Something went wrong");
     } finally {
       setLoading(false);

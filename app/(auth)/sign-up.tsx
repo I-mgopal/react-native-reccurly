@@ -32,7 +32,7 @@ export default function SignUp() {
       await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
       setPendingVerification(true);
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
+      console.error(`Sign-up failed: ${err.errors?.[0]?.message || err.message || 'unknown error'}`);
       Alert.alert("Error", err.errors?.[0]?.message || "Something went wrong");
     } finally {
       setLoading(false);
@@ -57,10 +57,11 @@ export default function SignUp() {
         await setActive({ session: completeSignUp.createdSessionId });
         router.replace('/(tab)');
       } else {
-        console.error(JSON.stringify(completeSignUp, null, 2));
+        console.log(`Sign-up attempt status: ${completeSignUp.status}`);
+        Alert.alert("Sign Up Incomplete", `Additional action required. Status: ${completeSignUp.status}`);
       }
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
+      console.error(`Verification failed: ${err.errors?.[0]?.message || err.message || 'unknown error'}`);
       Alert.alert("Error", err.errors?.[0]?.message || "Invalid verification code");
     } finally {
       setLoading(false);
